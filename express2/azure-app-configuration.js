@@ -1,23 +1,19 @@
 const { AppConfigurationClient } = require("@azure/app-configuration");
 
-//if (!process.env.production) {
-//  require("dotenv").config();
-//  console.log("debug environment");
-//}
+if (!process.env.production) {
+  require("dotenv").config();
+  console.log("debug environment");
+}
 
-//const connectionString = process.env["APPCONFIG_CONNECTION_STRING"];
-const connectionString = "";
+const connectionString = process.env.APPCONFIG_CONNECTION_STRING;
 console.log(connectionString)
 const client = new AppConfigurationClient(connectionString);
 
-const getConfigurationSetting = async (keyName) => {
+const getConfigurationSetting = async (key) => {
 
   try {
 
-    //const connectionString = "";
-    //const appConfigClient = new AppConfigurationClient(connectionString);
-    
-    return client.getConfigurationSetting({key: "AppTitle"}).then(result =>{
+    return client.getConfigurationSetting({key}).then(result =>{
         console.log(result);
         return result.value;
       }).catch(ex =>{
@@ -26,10 +22,10 @@ const getConfigurationSetting = async (keyName) => {
 
   } catch (ex) {
     console.log(ex);
-    throw ex;
+    return null; // no key found or error
   }
 };
 
 module.exports = {
-  getConfigurationSetting,
+  getConfigurationSetting
 };

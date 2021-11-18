@@ -1,5 +1,19 @@
 var React = require('react');
 
+/* Uses feature flag to display link to "beta" area */
+function NavigationBar(beta) {
+    return (
+        <container>
+            <header className="d-flex justify-content-center py-3">
+                <ul className="nav nav-pills">
+                    <li className="nav-item"><a href="#Home" className="nav-link active" aria-current="page">Home</a></li>
+                    {(beta===true) && <li className="nav-item"><a href="#Beta" className="nav-link">Beta</a></li>}
+                    <li className="nav-item"><a href="#Privacy" className="nav-link">Privacy</a></li>
+                </ul>
+            </header>
+        </container>
+    );
+}
 function Index(props) {
     return (
         <DefaultLayout >
@@ -8,19 +22,6 @@ function Index(props) {
                 <div className="p-5 mb-4 bg-light rounded-3 display-5 fw-bold text-center">Welcome</div>
             </container>
         </DefaultLayout>
-    );
-}
-function NavigationBar(beta) {
-    return (
-        <container>
-            <header className="d-flex justify-content-center py-3">
-                <ul className="nav nav-pills">
-                    <li className="nav-item"><a href="#Home" className="nav-link active" aria-current="page">Home</a></li>
-                    {beta && <li className="nav-item"><a href="#Beta" className="nav-link">Beta</a></li>}
-                    <li className="nav-item"><a href="#Privacy" className="nav-link">Privacy</a></li>
-                </ul>
-            </header>
-        </container>
     );
 }
 function DefaultLayout(props) {
