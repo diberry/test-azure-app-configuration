@@ -1,7 +1,8 @@
 var React = require('react');
 
 /* Uses feature flag to display link to "beta" area */
-function NavigationBar(beta) {
+function NavigationBar({beta}) {
+
     return (
         <container>
             <header className="d-flex justify-content-center py-3">
@@ -15,9 +16,10 @@ function NavigationBar(beta) {
     );
 }
 function Index(props) {
+
     return (
         <DefaultLayout >
-            <NavigationBar props={props}></NavigationBar>
+            <NavigationBar beta={props.beta}></NavigationBar>
             <container>
                 <div className="p-5 mb-4 bg-light rounded-3 display-5 fw-bold text-center">Welcome</div>
             </container>

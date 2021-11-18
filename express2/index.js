@@ -23,16 +23,14 @@ const server = async () => {
   app.get("/", async (req, res) => {
 
     // get feature flag
-    const beta = await getConfigurationSetting("beta");
+    const results = await getConfigurationSetting(".appconfig.featureflag/beta");
 
-    // configure props
-    const props = {
-      beta: (beta && beta.toLowerCase() == "true") ? true : false,
-    };
-    console.log(props);
+    const value = JSON.parse(results);
+
+    const beta = (value && value.enabled == true) ? true : false;
 
     // render navigation with or without "beta" feature available
-    res.render("index", props);
+    res.render("index", {beta});
   });
 
   return app;
